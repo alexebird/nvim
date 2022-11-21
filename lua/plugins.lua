@@ -19,7 +19,10 @@ return require('packer').startup(function()
   -- status line
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      opt = true,
+    }
   }
 
   -- tree
@@ -42,7 +45,7 @@ return require('packer').startup(function()
   use {
     'lewis6991/gitsigns.nvim',
     requires = {
-      'nvim-lua/plenary.nvim' -- library of lua functions
+      'nvim-lua/plenary.nvim', -- library of lua functions
     },
     -- tag = 'release' -- To use the latest release
   }
@@ -50,7 +53,11 @@ return require('packer').startup(function()
   -- search
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = {
+      {
+        'nvim-lua/plenary.nvim',
+      }
+    }
   }
   use 'nvim-telescope/telescope-fzf-native.nvim'
   use 'jremmen/vim-ripgrep'
@@ -87,17 +94,8 @@ return require('packer').startup(function()
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-nvim-lsp'
-  --
-  -- treesitter
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
-  }
-  use 'p00f/nvim-ts-rainbow'
-  use 'JoosepAlviste/nvim-ts-context-commentstring' -- sets comment plugin lang based on language under the cursor
 
   -- langs
-
   use 'hashivim/vim-terraform'
   use 'ekalinin/Dockerfile.vim'
   use 'pangloss/vim-javascript'
@@ -116,7 +114,15 @@ return require('packer').startup(function()
 
   use 'sbdchd/neoformat'
 
-  -- language servers
+  -- treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate'
+  }
+  use 'p00f/nvim-ts-rainbow'
+  use 'JoosepAlviste/nvim-ts-context-commentstring' -- sets comment plugin lang based on language under the cursor
+
+  -- language server protocol
   -- use 'neovim/nvim-lspconfig' -- Quickstart configurations for the Nvim LSP client.
   -- use 'williamboman/nvim-lsp-installer' -- Neovim plugin that allows you to seamlessly install LSP servers locally.
   use {
