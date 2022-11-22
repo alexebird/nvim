@@ -64,9 +64,10 @@ vnoremap # "9y<Esc>?<C-r>9<CR>
 
 command! SS source $MYVIMRC
 command! SV edit ~/.config/nvim/init.vim
-command! FW FixWhitespace
+" command! FW FixWhitespace
 
 noremap <leader>r :NvimTreeToggle<cr>
+noremap <leader>e :SymbolsOutline<cr>
 
 " resize windows faster
 nnoremap <C-w>, <C-w>10<
