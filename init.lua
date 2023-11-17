@@ -3,35 +3,26 @@
 --  \ \   / (_)_ __ ___
 --   \ \ / /| | '_ ` _ \
 --    \ V / | | | | | | |
---     \_/  |_|_| |_| |_| v3
+--     \_/  |_|_| |_| |_| v4
 --
 -- alexebird@gmail.com
--- created 2022/11/21
---
--- resources:
--- - https://numbersmithy.com/migrating-from-vim-to-neovim-at-the-beginning-of-2022/#nvim-cmp_completion_does_not_pick_up_words_from_other_buffers
---
--- Based on: https://github.com/LunarVim/nvim-basic-ide. The creator also has a YouTube playlist.
+-- created 2023/11/13
 
-require "bird.impatient"
-require "bird.plugins"
-require "bird.options"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
 vim.cmd("source " .. os.getenv("HOME") .. "/.config/nvim/old_init.vim")
 
-require "bird.nvim-tree"
-require "bird.comment"
-require "bird.lualine"
-require "bird.gitsigns"
-require "bird.telescope"
-require "bird.autopairs"
-require "bird.colorizer"
-require "bird.autotag"
-require "bird.indent_blankline"
-require "bird.hop"
-require "bird.kanagawa"          -- colorscheme
-require "bird.treesitter"
-require "bird.cmp"
-require "bird.lsp"
-require "bird.symbols-outline"
-require "bird.custom"
+require("bird.options")
+require("lazy").setup("plugins", opts)
+require("bird.custom")

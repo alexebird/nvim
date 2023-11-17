@@ -80,6 +80,7 @@ return packer.startup(function(use)
   use { "hrsh7th/cmp-nvim-lsp" }
   use { "hashivim/vim-terraform" }
   use { "ekalinin/Dockerfile.vim" }
+  use { "rust-lang/rust.vim" }
   use { "pangloss/vim-javascript" }
   use { "MaxMEllon/vim-jsx-pretty" }
   use { "sbdchd/neoformat" }

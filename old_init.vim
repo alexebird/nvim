@@ -32,7 +32,7 @@ set termguicolors
 " leader
 let mapleader = ","
 nnoremap <Space> <Nop>
-let maplocalleader=" "
+" let maplocalleader=" "
 set completeopt=menu,menuone,noselect
 
 " backup to ~/.tmp
@@ -63,7 +63,7 @@ vnoremap * "9y<Esc>/<C-r>9<CR>
 vnoremap # "9y<Esc>?<C-r>9<CR>
 
 command! SS source $MYVIMRC
-command! SV edit ~/.config/nvim/init.vim
+command! SV edit ~/.config/nvim/init.lua
 " command! FW FixWhitespace
 
 noremap <leader>r :NvimTreeToggle<cr>

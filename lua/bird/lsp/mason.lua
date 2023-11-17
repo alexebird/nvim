@@ -1,13 +1,15 @@
 local servers = {
-    "sumneko_lua",
-    "eslint",
-    "cssls",
-    "html",
-    "tsserver",
-    "pyright",
     "bashls",
+    "cssls",
+    "eslint",
+    "html",
     "jsonls",
+    "pyright",
+    "solargraph",
+    "sumneko_lua",
+    "tsserver",
     "yamlls",
+    "rust_analyzer",
 }
 
 local settings = {
