@@ -23,6 +23,14 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.cmd("source " .. os.getenv("HOME") .. "/.config/nvim/old_init.vim")
 
-require("bird.options")
+vim.opt.shell = "/bin/bash"
+vim.opt.backspace = "indent,eol,start"
+vim.opt.compatible = false
+vim.g.rustfmt_autosave = 1
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})
+
 require("lazy").setup("plugins", opts)
-require("bird.custom")
