@@ -134,7 +134,7 @@ let g:extra_whitespace_ignored_filetypes = ['TelescopePrompt']
 "-------------------------------------------------------------
 " clipboard
 "-------------------------------------------------------------
-if has("win32")
+if !empty($WSL_DISTRO_NAME)
     let g:clipboard = {
         \   'name': 'WslClipboard',
         \   'copy': {
