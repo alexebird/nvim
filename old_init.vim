@@ -134,6 +134,21 @@ let g:extra_whitespace_ignored_filetypes = ['TelescopePrompt']
 "-------------------------------------------------------------
 " clipboard
 "-------------------------------------------------------------
+if has("win32")
+    let g:clipboard = {
+        \   'name': 'WslClipboard',
+        \   'copy': {
+        \      '+': 'clip.exe',
+        \      '*': 'clip.exe',
+        \    },
+        \   'paste': {
+        \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        \   },
+        \   'cache_enabled': 0,
+        \ }
+endif
+
 " yank selection to system clipboard
 vnoremap Y "+y
 " yank line to system clipboard without trailing newline
