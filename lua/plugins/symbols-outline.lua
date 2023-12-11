@@ -5,7 +5,10 @@ return {
   },
   config = function()
     require("symbols-outline").setup({
-      autofold_depth = 2
+      autofold_depth = 2,
+      relative_width = false,
+      position = 'left',
+      width = 40,
     })
   end,
 }
