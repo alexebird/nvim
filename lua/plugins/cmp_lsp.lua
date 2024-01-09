@@ -81,6 +81,12 @@ lspconfig_spec.config = function()
   lspconfig.pyright.setup({
     capabilities = capabilities,
   })
+  -- lspconfig.ruby_ls.setup({
+  --   capabilities = capabilities,
+  -- })
+  lspconfig.solargraph.setup({
+    capabilities = capabilities,
+  })
 end
 
 
