@@ -31,7 +31,7 @@ set termguicolors
 
 " leader
 let mapleader = ","
-nnoremap <Space> <Nop>
+" nnoremap <Space> <Nop>
 " let maplocalleader=" "
 set completeopt=menu,menuone,noselect
 
@@ -61,13 +61,6 @@ nnoremap * :keepjumps normal! mi*`i<CR>
 " Esc to clear the selection, then search for the last selected thing.
 vnoremap * "9y<Esc>/<C-r>9<CR>
 vnoremap # "9y<Esc>?<C-r>9<CR>
-
-command! SS source $MYVIMRC
-command! SV edit ~/.config/nvim/init.lua
-" command! FW FixWhitespace
-
-noremap <leader>r :NvimTreeToggle<cr>
-noremap <leader>e :SymbolsOutline<cr>
 
 " resize windows faster
 nnoremap <C-w>, <C-w>10<
@@ -122,13 +115,15 @@ command! Date call PutsDate()
 "-------------------------------------------------------------
 " filetype adjustments
 "-------------------------------------------------------------
-autocmd FileType eruby setlocal commentstring=<!--\ %s\ -->
+" autocmd FileType eruby setlocal commentstring=<!--\ %s\ -->
 
-autocmd BufNewFile,BufRead *.tf         set ft=terraform
-autocmd BufNewFile,BufRead *.tfvars     set ft=terraform
-autocmd BufWritePre *.js Neoformat
+" autocmd BufNewFile,BufRead *.tf         set ft=terraform
+" autocmd BufNewFile,BufRead *.tfvars     set ft=terraform
+" autocmd BufWritePre *.js Neoformat
 
-let g:extra_whitespace_ignored_filetypes = ['TelescopePrompt']
+" I think this was from when i was using a plugin for removing trailing
+" whitespace
+" let g:extra_whitespace_ignored_filetypes = ['TelescopePrompt']
 
 
 "-------------------------------------------------------------
@@ -164,17 +159,6 @@ function! CopyFilnameToClipboard()
 endfunction
 
 command! CopyFname call CopyFilnameToClipboard()
-
-
-"-------------------------------------------------------------
-" telescope file finder
-"-------------------------------------------------------------
-nnoremap <C-p> <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <C-j> <cmd>Telescope buffers<cr>
-" nnoremap <C-j> <cmd>Telescope oldfiles only_cwd=true<cr>
-" nnoremap <C-j> <cmd>lua require('telescope.builtin').oldfiles({only_cwd=true})<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
 "-------------------------------------------------------------

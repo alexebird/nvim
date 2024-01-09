@@ -8,6 +8,7 @@
 -- alexebird@gmail.com
 -- created 2023/11/13, Scottsdale, AZ.
 
+-- Lazy.vim setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -21,39 +22,50 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- VimL vanilla vim options setup...
 vim.cmd("source " .. os.getenv("HOME") .. "/.config/nvim/old_init.vim")
-
+-- ...and trying out setting them in Lua.
 vim.opt.shell = "/bin/bash"
 vim.opt.backspace = "indent,eol,start"
 vim.opt.compatible = false
 
+-- This removes trailing whitespace when any buffer is written.
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
 })
 
+-- vim.api.nvim_create_user_command('SE', 'edit ~/.config/nvim/init.lua', {})
+
+-- This creates a :Date command that inserts the date as a markdown #heading.
+local function puts_date()
+  local date_str = os.date("# %c")
+  vim.api.nvim_put({date_str}, "", true, true)
+end
+vim.api.nvim_create_user_command("Date", puts_date, {})
+
+-- Load Lua plugin code.
 require("lazy").setup("plugins")
--- not added over from old vim setup yet:
--- use { "sbdchd/neoformat" }
--- use { "folke/trouble.nvim" } -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists to help you solve all the trouble your code is causing.
--- use { "tami5/lspsaga.nvim" } -- A light-weight lsp plugin based on neovim built-in lsp with highly a performant UI.
--- use { "ray-x/navigator.lua", requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}}
+
+
+-- telescope keybindings
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<C-k>', builtin.buffers, {})
+vim.keymap.set('n', '<C-j>', function() require('telescope.builtin').oldfiles({only_cwd=true}) end)
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 -- set hop keybindings
 local hop = require('hop')
-vim.keymap.set('n', 's', function()
-  hop.hint_char1()
-end, {remap=true})
-vim.keymap.set('n', 'S', function()
-  hop.hint_char2()
-end, {remap=true})
+vim.keymap.set('n', 's', function() hop.hint_char1() end, {remap=true})
+vim.keymap.set('n', 'S', function() hop.hint_char2() end, {remap=true})
 
--- trouble keybindings
--- vim.keymap.set("n", "<leader>tx", function() require("trouble").toggle() end)
--- vim.keymap.set("n", "<leader>tw", function() require("trouble").toggle("workspace_diagnostics") end)
--- vim.keymap.set("n", "<leader>td", function() require("trouble").toggle("document_diagnostics") end)
--- vim.keymap.set("n", "<leader>tq", function() require("trouble").toggle("quickfix") end)
--- vim.keymap.set("n", "<leader>tl", function() require("trouble").toggle("loclist") end)
--- vim.keymap.set("n", "<leader>tr", function() require("trouble").toggle("lsp_references") end)
-
+-- LSP keybindings
 vim.keymap.set("n", "<leader>mr", function() vim.lsp.buf.rename() end)
+
+-- aerial keybindings
+vim.keymap.set("n", "<leader>e", "<cmd>AerialToggle!<CR>")
+
+-- NvimTree keybindings
+vim.keymap.set("n", "<leader>r", "<cmd>NvimTreeToggle<CR>")
