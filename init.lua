@@ -7,6 +7,9 @@
 --
 -- alexebird@gmail.com
 -- created 2023/11/13, Scottsdale, AZ.
+--
+
+IS_WSL = vim.fn.has('wsl') == 1 or os.getenv("WSL_DISTRO_NAME") ~= nil
 
 -- Lazy.vim setup
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
