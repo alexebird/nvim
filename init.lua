@@ -65,7 +65,8 @@ vim.keymap.set('n', 's', function() hop.hint_char1() end, {remap=true})
 vim.keymap.set('n', 'S', function() hop.hint_char2() end, {remap=true})
 
 -- LSP keybindings
-vim.keymap.set("n", "<leader>mr", function() vim.lsp.buf.rename() end)
+vim.keymap.set("n", "<leader>mr", vim.lsp.buf.rename)
+vim.keymap.set("n", "<leader>md", vim.lsp.buf.definition)
 
 -- aerial keybindings
 vim.keymap.set("n", "<leader>e", "<cmd>AerialToggle!<CR>")
