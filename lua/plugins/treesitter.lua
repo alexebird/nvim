@@ -17,6 +17,7 @@ return {
         "vim",
         "vimdoc",
         "vue",
+        "yaml",
       },
       sync_install = false,
       highlight = { enable = true },

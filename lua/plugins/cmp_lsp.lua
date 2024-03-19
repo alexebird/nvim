@@ -87,6 +87,9 @@ lspconfig_spec.config = function()
   lspconfig.solargraph.setup({
     capabilities = capabilities,
   })
+  lspconfig.tsserver.setup({
+    capabilities = capabilities,
+  })
 end
 
 
