@@ -90,6 +90,9 @@ lspconfig_spec.config = function()
   lspconfig.tsserver.setup({
     capabilities = capabilities,
   })
+  lspconfig.gopls.setup({
+    capabilities = capabilities,
+  })
 end
 
 

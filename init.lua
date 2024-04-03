@@ -68,6 +68,11 @@ vim.keymap.set('n', 'S', function() hop.hint_char2() end, {remap=true})
 vim.keymap.set("n", "<leader>mr", vim.lsp.buf.rename)
 vim.keymap.set("n", "<leader>md", vim.lsp.buf.definition)
 
+-- vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, {silent = true, buffer = true})
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev)
+
 -- aerial keybindings
 vim.keymap.set("n", "<leader>e", "<cmd>AerialToggle!<CR>")
 
