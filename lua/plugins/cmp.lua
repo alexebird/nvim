@@ -46,62 +46,11 @@
 -- })
 
 
--- local mason_spec = {
---   'williamboman/mason.nvim',
---   lazy = false,
--- }
---
---
---
--- local mason_lspconfig_spec = {
---   'williamboman/mason-lspconfig.nvim',
---   lazy = false,
--- }
--- mason_lspconfig_spec.config = function()
---   local mason_lspconfig = require("mason-lspconfig")
---
---   mason_lspconfig.setup({
---     ensure_installed = { "lua_ls" },
---   })
--- end
-
-
-
-local lspconfig_spec = {
-  'neovim/nvim-lspconfig',
-  lazy = false,
-}
-lspconfig_spec.config = function()
-  local lspconfig = require("lspconfig")
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-  lspconfig.lua_ls.setup({
-    capabilities = capabilities,
-  })
-  lspconfig.pyright.setup({
-    capabilities = capabilities,
-  })
-  -- lspconfig.ruby_ls.setup({
-  --   capabilities = capabilities,
-  -- })
-  lspconfig.solargraph.setup({
-    capabilities = capabilities,
-  })
-  lspconfig.tsserver.setup({
-    capabilities = capabilities,
-  })
-  lspconfig.gopls.setup({
-    capabilities = capabilities,
-  })
-end
-
 
 local cmp_spec = {
   'hrsh7th/nvim-cmp',
   lazy = false,
   dependencies = {
-    -- 'williamboman/mason.nvim',
-    -- 'williamboman/mason-lspconfig.nvim',
     'neovim/nvim-lspconfig',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lua',
@@ -113,9 +62,12 @@ local cmp_spec = {
     'hrsh7th/vim-vsnip-integ',
   },
 }
+
 cmp_spec.config = function()
   local cmp = require("cmp")
   -- vim.opt.completeopt = { "menu", "menuone", "noselect" }
+  --
+  --
 
   cmp.setup({
     snippet = {
@@ -127,7 +79,6 @@ cmp_spec.config = function()
       -- completion = cmp.config.window.bordered(),
       -- documentation = cmp.config.window.bordered(),
     },
-
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -135,12 +86,18 @@ cmp_spec.config = function()
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
-
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
     }, {
-        { name = 'buffer' },
+      {
+        name = 'buffer',
+        option = {
+          get_bufnrs = function()
+            return vim.api.nvim_list_bufs()
+          end
+        }
+      },
     })
   })
 
@@ -162,8 +119,5 @@ cmp_spec.config = function()
 end
 
 return {
-  -- mason_spec,
-  -- mason_lsp_spec,
-  lspconfig_spec,
   cmp_spec,
 }
